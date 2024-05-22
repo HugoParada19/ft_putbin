@@ -6,7 +6,7 @@
 /*   By: htrindad <htrindad@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 12:01:49 by htrindad          #+#    #+#             */
-/*   Updated: 2024/05/22 12:18:47 by htrindad         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:31:28 by htrindad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,19 @@ static int	ft_binlen(int bin)
 	return (i);
 }
 
-static int	ft_ol(bin)
+void	ft_putbin_rec(int bin)
 {
-	return (ft_putchar_fd(bin + '0', 1));
+	if (bin > 1)
+		ft_putbin_rec(bin / 2);
+	ft_putchar_fd((bin % 2) + '0', 1);
 }
 
 int	ft_putbin(int bin)
 {
 	const int	len = ft_binlen(bin);
 
-	if (len < 2)
-		return (ft_ol(bin));
-	else
-	{
-		while (bin)
-		{
-			ft_putchar_fd((bin % 2) + '0', 1)
-			bin /= 2;
-		}
-	}
+	if (!bin)
+		return (ft_putchar_fd('0', 1));
+	ft_putbin_rec(bin);
 	return (len);
 }
